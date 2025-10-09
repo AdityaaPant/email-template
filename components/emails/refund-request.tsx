@@ -13,29 +13,8 @@ import {
   Column,
   Tailwind,
   Link,
+  Img,
 } from "@react-email/components";
-import { Img } from "@react-email/components";
-const Email = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const send = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const twitter = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const facebook = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const instagram = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const usa = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
-const avenue = () => {
-  return <Img src="cat.jpg" alt="Cat" width="300" height="300" />;
-};
 
 const RefundRequestEmail = (props: any) => {
   const {
@@ -52,7 +31,7 @@ const RefundRequestEmail = (props: any) => {
         <style>{`
           @media only screen and (max-width: 600px) {
             .heading-responsive { font-size: 28px !important; }
-            .text-large-responsive { font-size: 18px !important; }
+            .text-large-responsive { font-size: 20px !important; }
             .text-medium-responsive { font-size: 14px !important; }
             .text-small-responsive { font-size: 12px !important; }
             .text-tiny-responsive { font-size: 11px !important; }
@@ -67,6 +46,15 @@ const RefundRequestEmail = (props: any) => {
             .contact-row {
               display: block !important;
             }
+            .thank-you-icon {
+              width: 40px !important;
+              height: 40px !important;
+              margin-bottom: 12px !important;
+            }
+            .thank-you-icon svg {
+              width: 20px !important;
+              height: 20px !important;
+            }
           }
           @media only screen and (max-width: 480px) {
             .contact-column { 
@@ -75,6 +63,17 @@ const RefundRequestEmail = (props: any) => {
               padding-right: 0 !important; 
               margin-bottom: 16px !important;
               display: block !important;
+            }
+            .text-large-responsive { font-size: 18px !important; }
+            .text-medium-responsive { font-size: 13px !important; }
+            .thank-you-icon {
+              width: 36px !important;
+              height: 36px !important;
+              margin-bottom: 10px !important;
+            }
+            .thank-you-icon svg {
+              width: 18px !important;
+              height: 18px !important;
             }
           }
         `}</style>
@@ -96,27 +95,54 @@ const RefundRequestEmail = (props: any) => {
               }}
             >
               <Row>
-                <Column className="w-auto">
-                  <div className="flex items-center gap-[8px]">
-                    <Img
-                      src="https://assets.avenueticketing.com/avenue-logo.png"
-                      alt="Avenue logo"
-                      width="24"
-                      height="24"
-                    />
-                    <Text className="text-white text-[20px] font-medium m-0 logo-text-responsive">
-                      Avenue
-                    </Text>
-                  </div>
+                <Column style={{ width: "auto", verticalAlign: "middle" }}>
+                  <table style={{ margin: 0, padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{ verticalAlign: "middle", paddingRight: "8px" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/avenueLogo.png"
+                          alt="Avenue logo"
+                          width="150"
+                          height="25"
+                        />
+                      </td>
+                    </tr>
+                  </table>
                 </Column>
-                <Column className="text-right text-gray-400">
-                  View in browser
+                <Column style={{ textAlign: "right", verticalAlign: "middle" }}>
+                  <table style={{ margin: "0 0 0 auto", padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{
+                          verticalAlign: "middle",
+                          paddingRight: "4px",
+                        }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/link.png"
+                          alt="Browser icon"
+                          width="16"
+                          height="16"
+                        />
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <Text
+                          className="text-gray-400 text-[14px]"
+                          style={{ lineHeight: "1", margin: "0" }}
+                        >
+                          View in browser
+                        </Text>
+                      </td>
+                    </tr>
+                  </table>
                 </Column>
               </Row>
             </Section>
 
             {/* Main Heading */}
-            <Heading className="text-white text-[40px] font-bold leading-[1.2] mb-[40px] mt-0 heading-responsive">
+            <Heading className="text-white text-[36px] font-normal leading-[1.2] mb-[40px] mt-0 heading-responsive">
               We've Received Your Refund Request
             </Heading>
 
@@ -161,7 +187,7 @@ const RefundRequestEmail = (props: any) => {
                 }}
               >
                 <Img
-                  src="https://assets.avenueticketing.com/help-icon.png"
+                  src="https://assets.avenueticketing.com/email-template/help.png"
                   alt="Help icon"
                   width="20"
                   height="20"
@@ -185,12 +211,52 @@ const RefundRequestEmail = (props: any) => {
                       Phone number
                     </Text>
                     <div
-                      className="  text-center  rounded-full p-[12px] flex items-center gap-[8px]"
-                      style={{ border: "1px solid #FFFFFF13" }}
+                      style={{
+                        border: "1px solid #FFFFFF13",
+                        borderRadius: "25px",
+                        padding: "12px",
+                        textAlign: "center",
+                      }}
                     >
-                      <Text className="text-white text-center text-[15px] m-0 text-small-responsive">
-                        (555) 987 654
-                      </Text>
+                      <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                        <tr>
+                          <td
+                            style={{
+                              textAlign: "center",
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            <table
+                              style={{
+                                margin: "0 auto",
+                                padding: 0,
+                                borderSpacing: "0 0",
+                              }}
+                            >
+                              <tr>
+                                <td
+                                  style={{
+                                    verticalAlign: "middle",
+                                    paddingRight: "8px",
+                                  }}
+                                >
+                                  <Img
+                                    src="https://assets.avenueticketing.com/email-template/Flag.png"
+                                    alt="Phone icon"
+                                    width="16"
+                                    height="16"
+                                  />
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  <Text className="text-white text-[15px] m-0 text-small-responsive">
+                                    (555) 987 654
+                                  </Text>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </Column>
 
@@ -199,23 +265,126 @@ const RefundRequestEmail = (props: any) => {
                       Email Address
                     </Text>
                     <div
-                      className=" text-center  rounded-full p-[12px] flex items-center gap-[8px]"
-                      style={{ border: "1px solid #FFFFFF13" }}
+                      style={{
+                        border: "1px solid #FFFFFF13",
+                        borderRadius: "25px",
+                        padding: "12px",
+                        textAlign: "center",
+                      }}
                     >
-                      <Text className="text-white text-center text-[15px] m-0 text-small-responsive">
-                        help@avenue.events
-                      </Text>
+                      <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                        <tr>
+                          <td
+                            style={{
+                              textAlign: "center",
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            <table
+                              style={{
+                                margin: "0 auto",
+                                padding: 0,
+                                borderSpacing: "0 0",
+                              }}
+                            >
+                              <tr>
+                                <td
+                                  style={{
+                                    verticalAlign: "middle",
+                                    paddingRight: "8px",
+                                  }}
+                                >
+                                  <Img
+                                    src="https://assets.avenueticketing.com/email-template/mail.png"
+                                    alt="Email icon"
+                                    width="16"
+                                    height="16"
+                                  />
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  <Text className="text-white text-[15px] m-0 text-small-responsive">
+                                    help@avenue.events
+                                  </Text>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </Column>
                 </Row>
               </div>
             </Section>
-
+            {/* Social Media Icons */}
             {/* Footer */}
             <Section className="text-center pt-[40px]">
-              <Text className="text-white text-[20px] font-medium m-0 logo-text-responsive">
-                Avenue
-              </Text>
+              <table style={{ margin: "0 auto", padding: 0 }}>
+                <tr>
+                  <td style={{ verticalAlign: "middle", paddingRight: "8px" }}>
+                    <Img
+                      src="https://assets.avenueticketing.com/email-template/avenueLogo.png"
+                      alt="Avenue logo"
+                      width="150"
+                      height="25"
+                    />
+                  </td>
+                </tr>
+              </table>
+
+              {/* Social Media Icons */}
+              <div style={{ textAlign: "center", margin: "16px 0" }}>
+                <table
+                  style={{
+                    margin: "0 auto",
+                    padding: 0,
+                    borderSpacing: "16px 0",
+                  }}
+                >
+                  <tr>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://www.instagram.com/avenueticket/"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/instagram.png"
+                          alt="Instagram"
+                          width="24"
+                          height="24"
+                        />
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://www.facebook.com/people/Avenue-Ticketing/61578022446260/#"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/facebook.png"
+                          alt="Facebook"
+                          width="24"
+                          height="24"
+                        />
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://x.com/avenueticketHQ"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/twitter.png"
+                          alt="Twitter"
+                          width="20"
+                          height="20"
+                        />
+                      </Link>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
               <Text className="text-gray-500 text-[14px] my-[8px] text-small-responsive">
                 Avenue | 101 Ave, 10th Floor | Hawaii
               </Text>

@@ -11,261 +11,883 @@ import {
   Hr,
   Row,
   Column,
+  Link,
+  Img,
   Tailwind,
 } from "@react-email/components";
 
-const EventPostponedEmail = (props: any) => {
+const TicketCancellationEmail = (props: any) => {
   const {
     attendeeName = "John Doe",
     eventName = "Tech Conference 2024",
-    originalEventDate = "December 15, 2024",
-    originalEventTime = "9:00 AM - 6:00 PM IST",
-    newEventDate = "February 20, 2025",
-    newEventTime = "9:00 AM - 6:00 PM IST",
+    eventDate = "December 15, 2024",
+    eventTime = "9:00 AM - 6:00 PM IST",
     venue = "Convention Center, Sector 17, Chandigarh",
+    venueName = "Convention Center",
+    venueAddress = "Sector 17, Chandigarh",
+    venueCity = "Chandigarh, India",
     ticketNumber = "TC2024-001234",
+    ticketType = "General Admission",
     orderNumber = "ORD-789456123",
-    postponementReason = "to ensure the best possible experience for all attendees and accommodate our keynote speakers' schedules",
-    confirmationDeadline = "January 15, 2025",
-    refundDeadline = "January 10, 2025",
+    qrCodeUrl = "https://assets.avenueticketing.com/email-template/qrCode.png",
+    refundAmount = "$150.00",
+    processingTime = "5-7 business days",
+    tickets = [
+      { type: "Regular", quantity: 2, price: "$75.00 each" },
+      { type: "Early Bird", quantity: 1, price: "$60.00 each" },
+    ],
+    ticketDetails = [
+      { type: "Regular", section: "GA", row: "2", seat: "42", price: "$39" },
+      { type: "Regular", section: "GA", row: "2", seat: "43", price: "$39" },
+      {
+        type: "Early Bird",
+        section: "VIP",
+        row: "1",
+        seat: "12",
+        price: "$19",
+      },
+    ],
   } = props;
 
   return (
     <Html lang="en" dir="ltr">
-      <Head />
+      <Head>
+        <style>{`
+          @media only screen and (max-width: 600px) {
+            .heading-responsive { font-size: 28px !important; }
+            .text-large-responsive { font-size: 20px !important; }
+            .text-medium-responsive { font-size: 14px !important; }
+            .text-small-responsive { font-size: 12px !important; }
+            .text-tiny-responsive { font-size: 11px !important; }
+            .logo-text-responsive { font-size: 16px !important; }
+            .contact-column { 
+              width: 100% !important; 
+              padding-left: 0 !important; 
+              padding-right: 0 !important; 
+              margin-bottom: 16px !important;
+              display: block !important;
+            }
+            .contact-row {
+              display: block !important;
+            }
+            .thank-you-icon {
+              width: 40px !important;
+              height: 40px !important;
+              margin-bottom: 12px !important;
+            }
+            .thank-you-icon svg {
+              width: 20px !important;
+              height: 20px !important;
+            }
+          }
+          @media only screen and (max-width: 480px) {
+            .contact-column { 
+              width: 100% !important; 
+              padding-left: 0 !important; 
+              padding-right: 0 !important; 
+              margin-bottom: 16px !important;
+              display: block !important;
+            }
+            .text-large-responsive { font-size: 18px !important; }
+            .text-medium-responsive { font-size: 13px !important; }
+            .thank-you-icon {
+              width: 36px !important;
+              height: 36px !important;
+              margin-bottom: 10px !important;
+            }
+            .thank-you-icon svg {
+              width: 18px !important;
+              height: 18px !important;
+            }
+          }
+        `}</style>
+      </Head>
       <Preview>
-        {eventName} has been postponed to {newEventDate} - Your ticket remains
-        valid
+        Your ticket for {eventName} is cancelled! More details inside.
       </Preview>
       <Tailwind>
-        <Body className="bg-gray-100 font-sans py-[40px]">
-          <Container className="bg-white mx-auto px-[20px] py-[40px] max-w-[600px] rounded-[8px]">
-            {/* Header */}
-            <Section>
-              <Heading className="text-[32px] font-bold text-orange-600 text-center mb-[8px]">
-                📅 Event Postponed
-              </Heading>
-              <Text className="text-[16px] text-gray-600 text-center mb-[32px]">
-                Important update about {eventName}
-              </Text>
-            </Section>
-
-            {/* Postponement Notice */}
-            <Section className="bg-orange-50 border border-orange-200 rounded-[8px] p-[24px] mb-[32px]">
-              <Text className="text-[18px] font-semibold text-orange-800 mb-[8px]">
-                Dear {attendeeName},
-              </Text>
-              <Text className="text-[16px] text-orange-700 mb-[12px]">
-                We hope this message finds you well. We're writing to inform you
-                that <strong>{eventName}</strong>
-                has been postponed from <strong>
-                  {originalEventDate}
-                </strong> to <strong>{newEventDate}</strong>.
-              </Text>
-              <Text className="text-[16px] text-orange-700 mb-[12px]">
-                This decision was made {postponementReason}. We believe this new
-                date will allow us to deliver an even more exceptional
-                experience.
-              </Text>
-              <Text className="text-[16px] text-orange-700 mb-[0px]">
-                <strong>Good news:</strong> Your existing ticket remains
-                completely valid for the new date!
-              </Text>
-            </Section>
-
-            {/* Date Comparison */}
-            <Section className="mb-[32px]">
-              <Heading className="text-[24px] font-bold text-gray-900 mb-[20px]">
-                Updated Event Schedule
-              </Heading>
-
-              <Row className="mb-[16px]">
-                <Column className="w-[50%]">
-                  <Section className="bg-red-50 border border-red-200 rounded-[8px] p-[16px]">
-                    <Text className="text-[14px] font-semibold text-red-700 mb-[8px]">
-                      ❌ Original Date
-                    </Text>
-                    <Text className="text-[16px] text-red-800 mb-[4px] line-through">
-                      {originalEventDate}
-                    </Text>
-                    <Text className="text-[14px] text-red-600 mb-[0px] line-through">
-                      {originalEventTime}
-                    </Text>
-                  </Section>
+        <Body className="bg-[#0A0A0A] font-sans py-[40px] px-[20px]">
+          <Container className="bg-[#0A0A0A] mx-auto max-w-[600px]">
+            <Section
+              className="mb-[40px] "
+              style={{
+                border: "1px solid #FFFFFF13",
+                padding: "16px",
+                borderRadius: "50px",
+                backgroundColor: "#232323",
+              }}
+            >
+              <Row>
+                <Column style={{ width: "auto", verticalAlign: "middle" }}>
+                  <table style={{ margin: 0, padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{ verticalAlign: "middle", paddingRight: "8px" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/avenueLogo.png"
+                          alt="Avenue logo"
+                          width="150"
+                          height="25"
+                        />
+                      </td>
+                    </tr>
+                  </table>
                 </Column>
-                <Column className="w-[50%]">
-                  <Section className="bg-green-50 border border-green-200 rounded-[8px] p-[16px]">
-                    <Text className="text-[14px] font-semibold text-green-700 mb-[8px]">
-                      ✅ New Date
-                    </Text>
-                    <Text className="text-[18px] font-bold text-green-800 mb-[4px]">
-                      {newEventDate}
-                    </Text>
-                    <Text className="text-[14px] text-green-600 mb-[0px]">
-                      {newEventTime}
-                    </Text>
-                  </Section>
+                <Column style={{ textAlign: "right", verticalAlign: "middle" }}>
+                  <table style={{ margin: "0 0 0 auto", padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{
+                          verticalAlign: "middle",
+                          paddingRight: "4px",
+                        }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/link.png"
+                          alt="Browser icon"
+                          width="16"
+                          height="16"
+                        />
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <Text
+                          className="text-gray-400 text-[14px]"
+                          style={{ lineHeight: "1", margin: "0" }}
+                        >
+                          View in browser
+                        </Text>
+                      </td>
+                    </tr>
+                  </table>
                 </Column>
               </Row>
-
-              <Section className="bg-gray-50 border border-gray-200 rounded-[8px] p-[16px]">
-                <Text className="text-[14px] font-semibold text-gray-700 mb-[4px]">
-                  📍 Venue (Unchanged)
-                </Text>
-                <Text className="text-[16px] text-gray-900 mb-[8px]">
-                  {venue}
-                </Text>
-                <Text className="text-[14px] font-semibold text-gray-700 mb-[4px]">
-                  🎫 Your Ticket Number
-                </Text>
-                <Text className="text-[16px] font-mono text-gray-900 mb-[0px]">
-                  {ticketNumber}
-                </Text>
-              </Section>
             </Section>
-
-            <Hr className="border-gray-200 mb-[32px]" />
-
-            {/* Your Options */}
-            <Section className="mb-[32px]">
-              <Heading className="text-[24px] font-bold text-gray-900 mb-[20px]">
-                Your Options
-              </Heading>
-
-              <Section className="bg-blue-50 border border-blue-200 rounded-[8px] p-[20px] mb-[16px]">
-                <Text className="text-[16px] font-semibold text-blue-800 mb-[8px]">
-                  🎯 Option 1: Keep Your Ticket (Recommended)
-                </Text>
-                <Text className="text-[14px] text-blue-700 mb-[8px]">
-                  Your current ticket is automatically valid for the new date.
-                  No action needed! You'll receive updated event details and a
-                  new QR code closer to the event.
-                </Text>
-                <Text className="text-[14px] font-bold text-blue-800 mb-[0px]">
-                  Bonus: Early confirmed attendees get priority seating and a
-                  welcome gift!
-                </Text>
-              </Section>
-
-              <Section className="bg-yellow-50 border border-yellow-200 rounded-[8px] p-[20px]">
-                <Text className="text-[16px] font-semibold text-yellow-800 mb-[8px]">
-                  💰 Option 2: Request Full Refund
-                </Text>
-                <Text className="text-[14px] text-yellow-700 mb-[8px]">
-                  If the new date doesn't work for you, we completely
-                  understand. You can request a full refund by contacting our
-                  support team before <strong>{refundDeadline}</strong>.
-                </Text>
-                <Text className="text-[14px] text-yellow-700 mb-[0px]">
-                  Refunds will be processed within 3-5 business days back to
-                  your original payment method.
-                </Text>
-              </Section>
-            </Section>
-
-            {/* Action Required */}
-            <Section className="bg-purple-50 border border-purple-200 rounded-[8px] p-[20px] mb-[32px]">
-              <Text className="text-[16px] font-semibold text-purple-800 mb-[12px]">
-                📋 Action Required by {confirmationDeadline}
+            {/* Thank You Banner */}
+            <Section
+              className="bg-[#B5D4DD] rounded-[12px] mb-[16px] text-center"
+              style={{ padding: "20px" }}
+            >
+              <div
+                className="thank-you-icon"
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "0 auto 16px auto",
+                  textAlign: "center",
+                }}
+              >
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/eventCancel.png"
+                  alt="Checkmark Icon"
+                  width="50"
+                  height="50"
+                  style={{ display: "block" }}
+                />
+              </div>
+              <Text
+                className="text-large-responsive"
+                style={{
+                  fontSize: "36px",
+                  fontWeight: "normal",
+                  color: "black",
+                  lineHeight: "1",
+                  maxWidth: "350px",
+                  textAlign: "center",
+                  margin: "0 auto 8px auto",
+                }}
+              >
+                Your event has been postponed
               </Text>
-              <Text className="text-[14px] text-purple-700 mb-[8px]">
-                Please confirm your attendance for the new date by{" "}
-                <strong>{confirmationDeadline}</strong>
-                to help us with planning and to secure your priority benefits.
-              </Text>
-              <Text className="text-[14px] text-purple-700 mb-[8px]">
-                <strong>To confirm attendance:</strong> Reply to this email with
-                "CONFIRM" or contact our support team
-              </Text>
-              <Text className="text-[14px] text-purple-700 mb-[0px]">
-                <strong>For refund requests:</strong> Contact support before{" "}
-                {refundDeadline}
+              <Text
+                className="text-medium-responsive "
+                style={{
+                  fontSize: "16px",
+
+                  opacity: "0.7",
+                  margin: "0",
+                  color: "#00000080",
+                }}
+              >
+                This is just a heads up - your tickets are still valid
               </Text>
             </Section>
+            {/* Event Card */}
+            <Section className="bg-[#121212] border border-[#FFFFFF13] rounded-[12px] mb-[24px] overflow-hidden">
+              {/* Event Image */}
+              <div style={{ padding: "8px" }}>
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/bg.png"
+                  alt="Event image"
+                  width="100%"
+                  height="200"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "200px",
+                    objectFit: "fill",
+                    borderRadius: "8px",
+                  }}
+                />
+              </div>
 
-            {/* What's New */}
-            <Section className="bg-green-50 border border-green-200 rounded-[8px] p-[20px] mb-[32px]">
-              <Text className="text-[16px] font-semibold text-green-800 mb-[12px]">
-                🚀 What's New for the Postponed Event
+              <div className="p-[20px]">
+                {/* Event Title */}
+                <Text className="text-white text-[24px] font-bold mb-[16px] text-large-responsive">
+                  {eventName}
+                </Text>
+
+                {/* Event Details */}
+                <table
+                  style={{
+                    margin: "0 0 12px 0",
+                    padding: 0,
+                    borderSpacing: "0",
+                  }}
+                >
+                  <tr>
+                    <td
+                      style={{ verticalAlign: "middle", paddingRight: "8px" }}
+                    >
+                      <Img
+                        src="https://assets.avenueticketing.com/email-template/calendar-1.png"
+                        alt="Calendar icon"
+                        width="16"
+                        height="16"
+                        style={{ display: "block" }}
+                      />
+                    </td>
+                    <td style={{ verticalAlign: "middle" }}>
+                      <Text
+                        className="text-gray-400 text-[14px] text-small-responsive"
+                        style={{ margin: "0", lineHeight: "1.4" }}
+                      >
+                        {eventDate}, {eventTime}
+                      </Text>
+                    </td>
+                  </tr>
+                </table>
+
+                <table
+                  style={{
+                    margin: "0 0 16px 0",
+                    padding: 0,
+                    borderSpacing: "0",
+                  }}
+                >
+                  <tr>
+                    <td style={{ verticalAlign: "top", paddingRight: "8px" }}>
+                      <Img
+                        src="https://assets.avenueticketing.com/email-template/map.png"
+                        alt="Location icon"
+                        width="16"
+                        height="16"
+                        style={{ display: "block", marginTop: "2px" }}
+                      />
+                    </td>
+                    <td style={{ verticalAlign: "top" }}>
+                      <Text
+                        className="text-gray-400 text-[14px] text-small-responsive"
+                        style={{ margin: "0 0 4px 0", lineHeight: "1.4" }}
+                      >
+                        {venueName}
+                      </Text>
+                      <Text
+                        className="text-gray-400 text-[14px] text-small-responsive"
+                        style={{ margin: "0 0 4px 0", lineHeight: "1.4" }}
+                      >
+                        {venueAddress}
+                      </Text>
+                      <Text
+                        className="text-gray-400 text-[14px] text-small-responsive"
+                        style={{ margin: "0", lineHeight: "1.4" }}
+                      >
+                        {venueCity}
+                      </Text>
+                    </td>
+                  </tr>
+                </table>
+
+                {/* Ticket Quantities */}
+                {tickets.map((ticket: any, index: number) => (
+                  <table
+                    key={index}
+                    style={{
+                      margin: "0 0 4px 0",
+                      padding: 0,
+                      borderSpacing: "0",
+                    }}
+                  >
+                    <tr>
+                      <td
+                        style={{ verticalAlign: "middle", paddingRight: "8px" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/ticket.png"
+                          alt="Ticket icon"
+                          width="16"
+                          height="16"
+                          style={{ display: "block" }}
+                        />
+                      </td>
+                      <td style={{ verticalAlign: "middle" }}>
+                        <Text
+                          className="text-gray-400 text-[14px] text-small-responsive"
+                          style={{ margin: "0", lineHeight: "1.4" }}
+                        >
+                          {ticket.type} × {ticket.quantity}
+                        </Text>
+                      </td>
+                    </tr>
+                  </table>
+                ))}
+
+                {/* Action Buttons - Remove the description from here */}
+              </div>
+            </Section>
+            {/* Event Cancellation Info */}
+            <Section className="mb-[24px]">
+              <Text className="text-white text-[16px] font-normal mb-[16px]">
+                Reschedule
               </Text>
-              <Text className="text-[14px] text-green-700 mb-[8px]">
-                • Additional keynote speaker: Industry leader joining our lineup
-              </Text>
-              <Text className="text-[14px] text-green-700 mb-[8px]">
-                • Extended networking session with premium refreshments
-              </Text>
-              <Text className="text-[14px] text-green-700 mb-[8px]">
-                • Exclusive workshop sessions for confirmed early attendees
-              </Text>
-              <Text className="text-[14px] text-green-700 mb-[8px]">
-                • Digital resource pack with bonus content worth ₹500
-              </Text>
-              <Text className="text-[14px] text-green-700 mb-[0px]">
-                • Priority access to future events and early-bird pricing
+              <Text className="text-gray-300 text-[14px] mb-[24px]">
+                The event organizer is still trying to reschedule your event; if
+                they do, your tickets will remain good for the rescheduled date.
+                Hang on to your tickets - we'll email you as soon as the new
+                date is announced. We understand that you might not be able to
+                make it, so we
               </Text>
             </Section>
+            {/* Order Summary */}
+            <Section
+              className="bg-[#000000] rounded-[12px] mb-[24px]"
+              style={{ border: "1px solid #FFFFFF13" }}
+            >
+              <div
+                className="flex items-center gap-[8px] p-3 rounded-t-[12px]"
+                style={{
+                  borderBottom: "1px solid #FFFFFF13",
+                  backgroundColor: "#101010",
+                }}
+              >
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/options.png"
+                  alt="Order summary icon"
+                  width="20"
+                  height="20"
+                  className="inline-block"
+                />
+                <Text className="text-white text-[18px] font-semibold m-0 text-large-responsive">
+                  Order summary
+                </Text>
+              </div>
+              <div className="p-3">
+                {/* Order ID */}
+                <div className="mb-[16px]">
+                  <Text className="text-white text-[16px] font-medium mb-[4px] text-medium-responsive">
+                    Order
+                  </Text>
+                  <Text className="text-gray-400 text-[14px] text-small-responsive">
+                    {orderNumber}
+                  </Text>
+                </div>
 
-            {/* Important Reminders */}
-            <Section className="bg-gray-50 border border-gray-200 rounded-[8px] p-[20px] mb-[32px]">
-              <Text className="text-[16px] font-semibold text-gray-800 mb-[12px]">
-                📌 Important Reminders:
-              </Text>
-              <Text className="text-[14px] text-gray-700 mb-[8px]">
-                • Your current ticket and QR code remain valid until the new
-                event date
-              </Text>
-              <Text className="text-[14px] text-gray-700 mb-[8px]">
-                • New QR codes and updated event materials will be sent 1 week
-                before the event
-              </Text>
-              <Text className="text-[14px] text-gray-700 mb-[8px]">
-                • Hotel and travel arrangements may need to be updated for the
-                new date
-              </Text>
-              <Text className="text-[14px] text-gray-700 mb-[8px]">
-                • All event content, speakers, and agenda remain the same unless
-                otherwise noted
-              </Text>
-              <Text className="text-[14px] text-gray-700 mb-[0px]">
-                • Refund deadline: {refundDeadline} | Confirmation deadline:{" "}
-                {confirmationDeadline}
-              </Text>
+                {/* Two Column Layout */}
+                <Row>
+                  {/* Purchase Column */}
+                  <Column className="w-[50%] pr-2">
+                    <Text className="text-white text-[16px] font-medium mb-[8px] text-medium-responsive">
+                      Purchase
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] mb-[4px] text-small-responsive">
+                      {venueName}
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] text-small-responsive">
+                      {eventDate}, {eventTime}
+                    </Text>
+                  </Column>
+
+                  {/* Billing Column */}
+                  <Column className="w-[50%] pl-2">
+                    <Text className="text-white text-[16px] font-medium mb-[8px] text-medium-responsive">
+                      Billing
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] mb-[4px] text-small-responsive">
+                      {attendeeName}
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] mb-[4px] text-small-responsive">
+                      Payment method: Amex
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] mb-[4px] text-small-responsive">
+                      Charge: $97
+                    </Text>
+                    <Text className="text-gray-400 text-[14px] text-small-responsive">
+                      Last 4 digits: 9090
+                    </Text>
+                  </Column>
+                </Row>
+              </div>
+            </Section>{" "}
+            {/* Your Order */}
+            <Section
+              className="bg-[#000000] rounded-[12px] mb-[24px]"
+              style={{ border: "1px solid #FFFFFF13" }}
+            >
+              <div
+                className="flex items-center gap-[8px] p-3 rounded-t-[12px]"
+                style={{
+                  borderBottom: "1px solid #FFFFFF13",
+                  backgroundColor: "#101010",
+                }}
+              >
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/lock.png"
+                  alt="Your order icon"
+                  width="20"
+                  height="20"
+                  className="inline-block"
+                />
+                <Text className="text-white text-[18px] font-semibold m-0 text-large-responsive">
+                  Refund Summary
+                </Text>
+              </div>
+              <div className="p-3">
+                {/* Dynamic Ticket Details - Row Style */}
+                {ticketDetails.map((ticket: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`${index !== ticketDetails.length - 1 ? "mb-[8px] pb-[8px]" : ""}`}
+                    style={{
+                      borderBottom:
+                        index !== ticketDetails.length - 1
+                          ? "1px solid #FFFFFF13"
+                          : "none",
+                    }}
+                  >
+                    {/* Headers Row */}
+                    <table
+                      style={{ width: "100%", margin: "0 0 4px 0", padding: 0 }}
+                    >
+                      <tr>
+                        <td style={{ width: "25%", padding: "0 8px 0 0" }}>
+                          <Text className="text-gray-400 text-[12px] font-medium text-tiny-responsive my-1">
+                            SECTION
+                          </Text>
+                        </td>
+                        <td style={{ width: "25%", padding: "0 8px" }}>
+                          <Text className="text-gray-400 text-[12px] font-medium text-tiny-responsive my-1">
+                            ROW
+                          </Text>
+                        </td>
+                        <td style={{ width: "25%", padding: "0 8px" }}>
+                          <Text className="text-gray-400 text-[12px] font-medium text-tiny-responsive my-1">
+                            SEAT
+                          </Text>
+                        </td>
+                        <td style={{ width: "25%", padding: "0 0 0 8px" }}>
+                          <Text className="text-gray-400 text-[12px] font-medium text-tiny-responsive my-1">
+                            PRICE
+                          </Text>
+                        </td>
+                      </tr>
+                    </table>
+
+                    {/* Values Row */}
+                    <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                      <tr>
+                        <td
+                          style={{
+                            width: "25%",
+                            padding: "0 8px 0 0",
+                            verticalAlign: "middle",
+                            marginTop: "4px",
+                            marginBottom: "4px",
+                          }}
+                        >
+                          <table style={{ margin: 0, padding: 0 }}>
+                            <tr>
+                              <td
+                                style={{
+                                  verticalAlign: "middle",
+                                  paddingRight: "8px",
+                                }}
+                              >
+                                <Img
+                                  src="https://assets.avenueticketing.com/email-template/ticket.png"
+                                  alt="Ticket icon"
+                                  width="16"
+                                  height="16"
+                                />
+                              </td>
+                              <td style={{ verticalAlign: "middle" }}>
+                                <Text className="text-white text-[16px] font-medium text-medium-responsive">
+                                  {ticket.type}
+                                </Text>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td
+                          style={{
+                            width: "25%",
+                            padding: "0 8px",
+                            verticalAlign: "middle",
+                          }}
+                        >
+                          <Text className="text-white text-[16px] text-medium-responsive my-1">
+                            {ticket.row}
+                          </Text>
+                        </td>
+                        <td
+                          style={{
+                            width: "25%",
+                            padding: "0 8px",
+                            verticalAlign: "middle",
+                          }}
+                        >
+                          <Text className="text-white text-[16px] text-medium-responsive my-1">
+                            {ticket.seat}
+                          </Text>
+                        </td>
+                        <td
+                          style={{
+                            width: "25%",
+                            padding: "0 0 0 8px",
+                            verticalAlign: "middle",
+                          }}
+                        >
+                          <Text className="text-white text-[16px] text-medium-responsive my-1">
+                            {ticket.price}
+                          </Text>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                ))}
+              </div>
             </Section>
+            {/* Help Section */}
+            <Section
+              className="bg-[#0A0A0A] rounded-[12px] "
+              style={{ border: "1px solid #FFFFFF13" }}
+            >
+              <div
+                className=" flex items-center gap-[8px] p-3 rounded-t-[12px]"
+                style={{
+                  borderBottom: "1px solid #FFFFFF13",
+                  backgroundColor: "#101010",
+                }}
+              >
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/help.png"
+                  alt="Help icon"
+                  width="20"
+                  height="20"
+                  className="inline-block"
+                />
+                <Text className="text-white text-[18px] font-semibold m-0 text-large-responsive">
+                  Need Help?
+                </Text>
+              </div>
+              <div className="p-3">
+                <Text className="text-white text-[16px] font-semibold mb-[4px] mt-[16px] text-medium-responsive">
+                  We are here for you
+                </Text>
+                <Text className="text-gray-400 text-[14px] mb-[24px] mt-0 text-small-responsive">
+                  Reach out to us over email or phone 24/7
+                </Text>
 
-            {/* Contact Information */}
-            <Section className="mb-[32px]">
-              <Text className="text-[16px] font-semibold text-gray-700 mb-[8px]">
-                Questions About the Postponement?
-              </Text>
-              <Text className="text-[14px] text-gray-600 mb-[4px]">
-                Email: support@techconference.com (Subject: Event Postponement -{" "}
-                {ticketNumber})
-              </Text>
-              <Text className="text-[14px] text-gray-600 mb-[4px]">
-                Phone: +91 98765 43210 (Extended hours: 8 AM - 8 PM IST)
-              </Text>
-              <Text className="text-[14px] text-gray-600 mb-[0px]">
-                Our team is ready to assist with confirmations, refunds, and any
-                other questions.
-              </Text>
+                <Row className="contact-row">
+                  <Column className="w-[50%] pr-[10px] contact-column">
+                    <Text className="text-white text-[14px] mb-[8px] mt-0 text-small-responsive">
+                      Phone number
+                    </Text>
+                    <div
+                      style={{
+                        border: "1px solid #FFFFFF13",
+                        borderRadius: "25px",
+                        padding: "12px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                        <tr>
+                          <td
+                            style={{
+                              textAlign: "center",
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            <table
+                              style={{
+                                margin: "0 auto",
+                                padding: 0,
+                                borderSpacing: "0 0",
+                              }}
+                            >
+                              <tr>
+                                <td
+                                  style={{
+                                    verticalAlign: "middle",
+                                    paddingRight: "8px",
+                                  }}
+                                >
+                                  <Img
+                                    src="https://assets.avenueticketing.com/email-template/Flag.png"
+                                    alt="Phone icon"
+                                    width="16"
+                                    height="16"
+                                  />
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  <Text className="text-white text-[15px] m-0 text-small-responsive">
+                                    (555) 987 654
+                                  </Text>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </Column>
+
+                  <Column className="w-[50%] pl-[10px] contact-column">
+                    <Text className="text-white text-[14px] mb-[8px] mt-0 text-small-responsive">
+                      Email Address
+                    </Text>
+                    <div
+                      style={{
+                        border: "1px solid #FFFFFF13",
+                        borderRadius: "25px",
+                        padding: "12px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                        <tr>
+                          <td
+                            style={{
+                              textAlign: "center",
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            <table
+                              style={{
+                                margin: "0 auto",
+                                padding: 0,
+                                borderSpacing: "0 0",
+                              }}
+                            >
+                              <tr>
+                                <td
+                                  style={{
+                                    verticalAlign: "middle",
+                                    paddingRight: "8px",
+                                  }}
+                                >
+                                  <Img
+                                    src="https://assets.avenueticketing.com/email-template/mail.png"
+                                    alt="Email icon"
+                                    width="16"
+                                    height="16"
+                                  />
+                                </td>
+                                <td style={{ verticalAlign: "middle" }}>
+                                  <Text className="text-white text-[15px] m-0 text-small-responsive">
+                                    help@avenue.events
+                                  </Text>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </Column>
+                </Row>
+              </div>
             </Section>
+            {/* QR Code Section */}
+            {/* QR Code Section */}
+            <Section className="text-center mb-[32px]">
+              <div className="bg-[#000000] border border-[#FFFFFF13] rounded-[12px] p-[24px] inline-block">
+                <Img
+                  src={qrCodeUrl}
+                  alt="QR Code for ticket entry"
+                  className="w-[200px] h-[200px] mx-auto mb-[12px]"
+                />
+              </div>
 
-            <Hr className="border-gray-200 mb-[32px]" />
+              {/* Wallet Buttons */}
+              <div className="mt-[16px]">
+                <div
+                  className="bg-[#000000] rounded-[50px] p-[16px] mb-[8px] text-center"
+                  style={{ border: "1px solid #FFFFFF13" }}
+                >
+                  <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        <table
+                          style={{
+                            margin: "0 auto",
+                            padding: 0,
+                            borderSpacing: "0 0",
+                          }}
+                        >
+                          <tr>
+                            <td
+                              style={{
+                                verticalAlign: "middle",
+                                paddingRight: "8px",
+                              }}
+                            >
+                              <Img
+                                src="https://assets.avenueticketing.com/email-template/apple.png"
+                                alt="Apple Wallet icon"
+                                width="20"
+                                height="20"
+                              />
+                            </td>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Text className="text-white text-[16px] font-medium m-0 text-medium-responsive">
+                                Add to Apple Wallet
+                              </Text>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
 
+                <div
+                  className="bg-[#000000] rounded-[50px] p-[16px] text-center"
+                  style={{ border: "1px solid #FFFFFF13" }}
+                >
+                  <table style={{ width: "100%", margin: 0, padding: 0 }}>
+                    <tr>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          verticalAlign: "middle",
+                        }}
+                      >
+                        <table
+                          style={{
+                            margin: "0 auto",
+                            padding: 0,
+                            borderSpacing: "0 0",
+                          }}
+                        >
+                          <tr>
+                            <td
+                              style={{
+                                verticalAlign: "middle",
+                                paddingRight: "8px",
+                              }}
+                            >
+                              <Img
+                                src="https://assets.avenueticketing.com/email-template/google.png"
+                                alt="Google Wallet icon"
+                                width="20"
+                                height="20"
+                              />
+                            </td>
+                            <td style={{ verticalAlign: "middle" }}>
+                              <Text className="text-white text-[16px] font-medium m-0 text-medium-responsive">
+                                Add to Google Wallet
+                              </Text>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </Section>
             {/* Footer */}
-            <Section>
-              <Text className="text-[14px] text-gray-600 text-center mb-[12px]">
-                Thank you for your understanding and continued support. We're
-                excited to see you at the rescheduled event!
+            <Section className="text-center pt-[40px]">
+              <table style={{ margin: "0 auto", padding: 0 }}>
+                <tr>
+                  <td style={{ verticalAlign: "middle", paddingRight: "8px" }}>
+                    <Img
+                      src="https://assets.avenueticketing.com/email-template/avenueLogo.png"
+                      alt="Avenue logo"
+                      width="150"
+                      height="25"
+                    />
+                  </td>
+                </tr>
+              </table>
+
+              {/* Social Media Icons */}
+              <div style={{ textAlign: "center", margin: "16px 0" }}>
+                <table
+                  style={{
+                    margin: "0 auto",
+                    padding: 0,
+                    borderSpacing: "16px 0",
+                  }}
+                >
+                  <tr>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://www.instagram.com/avenueticket/"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/instagram.png"
+                          alt="Instagram"
+                          width="24"
+                          height="24"
+                        />
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://www.facebook.com/people/Avenue-Ticketing/61578022446260/#"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/facebook.png"
+                          alt="Facebook"
+                          width="24"
+                          height="24"
+                        />
+                      </Link>
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <Link
+                        href="https://x.com/avenueticketHQ"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Img
+                          src="https://assets.avenueticketing.com/email-template/twitter.png"
+                          alt="Twitter"
+                          width="20"
+                          height="20"
+                        />
+                      </Link>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <Text className="text-gray-500 text-[14px] my-[8px] text-small-responsive">
+                Avenue | 101 Ave, 10th Floor | Hawaii
               </Text>
-              <Text className="text-[12px] text-gray-500 text-center mb-[8px] m-0">
-                Tech Conference Organizers
-              </Text>
-              <Text className="text-[12px] text-gray-500 text-center mb-[8px] m-0">
-                123 Event Street, Chandigarh, Punjab 160017, India
-              </Text>
-              <Text className="text-[12px] text-gray-500 text-center mb-[0px] m-0">
-                © 2024 Tech Conference. All rights reserved.
+              <Text className="text-gray-500 text-[14px] mt-[4px] mb-0 text-small-responsive">
+                Copyright 2025 Avenue. All rights reserved.
               </Text>
             </Section>
           </Container>
@@ -275,20 +897,17 @@ const EventPostponedEmail = (props: any) => {
   );
 };
 
-EventPostponedEmail.PreviewProps = {
+TicketCancellationEmail.PreviewProps = {
   attendeeName: "John Doe",
   eventName: "Tech Conference 2024",
-  originalEventDate: "December 15, 2024",
-  originalEventTime: "9:00 AM - 6:00 PM IST",
-  newEventDate: "February 20, 2025",
-  newEventTime: "9:00 AM - 6:00 PM IST",
+  eventDate: "December 15, 2024",
+  eventTime: "9:00 AM - 6:00 PM IST",
   venue: "Convention Center, Sector 17, Chandigarh",
   ticketNumber: "TC2024-001234",
+  ticketType: "General Admission",
   orderNumber: "ORD-789456123",
-  postponementReason:
-    "to ensure the best possible experience for all attendees and accommodate our keynote speakers' schedules",
-  confirmationDeadline: "January 15, 2025",
-  refundDeadline: "January 10, 2025",
+  qrCodeUrl:
+    "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TC2024-001234",
 };
 
-export default EventPostponedEmail;
+export default TicketCancellationEmail;
