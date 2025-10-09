@@ -16,7 +16,7 @@ import {
   Tailwind,
 } from "@react-email/components";
 
-const TicketCancellationEmail = (props: any) => {
+const eventPostpone = (props: any) => {
   const {
     attendeeName = "John Doe",
     eventName = "Tech Conference 2024",
@@ -897,7 +897,7 @@ const TicketCancellationEmail = (props: any) => {
   );
 };
 
-TicketCancellationEmail.PreviewProps = {
+eventPostpone.PreviewProps = {
   attendeeName: "John Doe",
   eventName: "Tech Conference 2024",
   eventDate: "December 15, 2024",
@@ -910,4 +910,4 @@ TicketCancellationEmail.PreviewProps = {
     "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TC2024-001234",
 };
 
-export default TicketCancellationEmail;
+export default eventPostpone;
