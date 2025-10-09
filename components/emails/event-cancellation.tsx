@@ -22,10 +22,30 @@ const EventCancellationEmail = (props: any) => {
     eventDate = "December 15, 2024",
     eventTime = "9:00 AM - 6:00 PM IST",
     venue = "Convention Center, Sector 17, Chandigarh",
+    venueName = "Convention Center",
+    venueAddress = "Sector 17, Chandigarh",
+    venueCity = "Chandigarh, India",
     ticketNumber = "TC2024-001234",
     ticketType = "General Admission",
     orderNumber = "ORD-789456123",
     qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TC2024-001234",
+    refundAmount = "$150.00",
+    processingTime = "5-7 business days",
+    tickets = [
+      { type: "Regular", quantity: 2, price: "$75.00 each" },
+      { type: "Early Bird", quantity: 1, price: "$60.00 each" },
+    ],
+    ticketDetails = [
+      { type: "Regular", section: "GA", row: "2", seat: "42", price: "$39" },
+      { type: "Regular", section: "GA", row: "2", seat: "43", price: "$39" },
+      {
+        type: "Early Bird",
+        section: "VIP",
+        row: "1",
+        seat: "12",
+        price: "$19",
+      },
+    ],
   } = props;
 
   return (
@@ -99,38 +119,12 @@ const EventCancellationEmail = (props: any) => {
               <Row>
                 <Column className="w-auto">
                   <div className="flex items-center gap-[8px]">
-                    <svg
+                    <Img
+                      src="https://assets.avenueticketing.com/email-template/avenue-logo.png"
+                      alt="Avenue Logo"
                       width="24"
                       height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M17.1712 21.1008C16.8093 21.9051 16.3594 22.6927 15.8201 23.3741C20.2949 21.8659 23.5889 17.7909 23.9516 12.9002H22.3586C20.4147 12.9002 18.8533 14.4518 18.5373 16.3699C18.246 18.1379 17.7801 19.7479 17.1712 21.1008Z"
-                        fill="#34B2DA"
-                      />
-                      <path
-                        d="M13.6474 12.9002C15.6826 12.9002 17.3475 14.5981 16.9736 16.5987C16.1617 20.9441 14.2337 24 11.9844 24C9.13838 24 6.80657 19.1071 6.59952 12.9002H13.6474Z"
-                        fill="#34B2DA"
-                      />
-                      <path
-                        d="M18.5786 7.88908C18.8763 9.82507 20.445 11.3989 22.4037 11.3989H23.9701C23.7227 6.37524 20.3861 2.16395 15.8201 0.624977C16.3594 1.30642 16.8093 2.09401 17.1712 2.89821C17.8098 4.31722 18.2911 6.01885 18.5786 7.88908Z"
-                        fill="#34B2DA"
-                      />
-                      <path
-                        d="M17.0343 7.73728C17.3747 9.72781 15.7171 11.3998 13.6976 11.3998H6.59171C6.73234 5.05124 9.09324 -1.52588e-05 11.985 -1.52588e-05C14.2917 -1.52588e-05 16.2607 3.21426 17.0343 7.73728Z"
-                        fill="#34B2DA"
-                      />
-                      <path
-                        d="M5.09148 11.3989C5.15964 8.15397 5.77869 5.16536 6.79893 2.89821C7.16078 2.09401 7.61066 1.30642 8.15005 0.624977C3.58406 2.16395 0.247387 6.37524 1.52588e-05 11.3989H5.09148Z"
-                        fill="#34B2DA"
-                      />
-                      <path
-                        d="M0.0185699 12.9002C0.381204 17.7909 3.6753 21.8659 8.1501 23.3741C7.61071 22.6927 7.16084 21.9051 6.79898 21.1008C5.81026 18.9037 5.19832 16.0291 5.09943 12.9002H0.0185699Z"
-                        fill="#34B2DA"
-                      />
-                    </svg>
+                    />
                     <Text className="text-white text-[20px] font-medium m-0 logo-text-responsive">
                       Avenue
                     </Text>
@@ -159,21 +153,17 @@ const EventCancellationEmail = (props: any) => {
                   margin: "0 auto 16px auto",
                 }}
               >
-                <svg
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/twitter.webp"
+                  alt="Cancel Icon"
                   width="24"
                   height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  style={{ display: "block" }}
-                >
-                  <path
-                    d="M18 6L6 18M6 6l12 12"
-                    stroke="#2DD4BF"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                  style={{
+                    display: "block",
+                    filter:
+                      "brightness(0) saturate(100%) invert(85%) sepia(19%) saturate(1944%) hue-rotate(131deg) brightness(90%) contrast(87%)",
+                  }}
+                />
               </div>
               <Text
                 className="text-large-responsive"
@@ -225,120 +215,61 @@ const EventCancellationEmail = (props: any) => {
               <div className="p-[20px]">
                 {/* Event Title */}
                 <Text className="text-white text-[24px] font-bold mb-[16px] text-large-responsive">
-                  After Hours Neon
+                  {eventName}
                 </Text>
 
                 {/* Event Details */}
                 <div className="flex items-start gap-[8px] mb-[12px]">
-                  <svg
+                  <Img
+                    src="https://assets.avenueticketing.com/email-template/calendar-icon.png"
+                    alt="Calendar Icon"
                     width="16"
                     height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="mt-1 flex-shrink-0"
-                  >
-                    <rect
-                      x="3"
-                      y="4"
-                      width="18"
-                      height="18"
-                      rx="2"
-                      ry="2"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                    <line
-                      x1="16"
-                      y1="2"
-                      x2="16"
-                      y2="6"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                    <line
-                      x1="8"
-                      y1="2"
-                      x2="8"
-                      y2="6"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                    <line
-                      x1="3"
-                      y1="10"
-                      x2="21"
-                      y2="10"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                  </svg>
+                    style={{ marginTop: "4px", flexShrink: "0" }}
+                  />
                   <Text className="text-gray-400 text-[14px] text-small-responsive">
-                    Thursday, 28 Dec, from 22:00 to 24:00 (PST)
+                    {eventDate}, {eventTime}
                   </Text>
                 </div>
 
                 <div className="flex items-start gap-[8px] mb-[16px]">
-                  <svg
+                  <Img
+                    src="https://assets.avenueticketing.com/email-template/location-icon.png"
+                    alt="Location Icon"
                     width="16"
                     height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="mt-1 flex-shrink-0"
-                  >
-                    <path
-                      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                    <circle
-                      cx="12"
-                      cy="10"
-                      r="3"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                  </svg>
+                    style={{ marginTop: "4px", flexShrink: "0" }}
+                  />
                   <div>
                     <Text className="text-gray-400 text-[14px] text-small-responsive">
-                      Cloud Nine Club
+                      {venueName}
                     </Text>
                     <Text className="text-gray-400 text-[14px] text-small-responsive">
-                      220 North Ada St
+                      {venueAddress}
                     </Text>
                     <Text className="text-gray-400 text-[14px] text-small-responsive">
-                      Chicago, IL 60607
+                      {venueCity}
                     </Text>
                   </div>
                 </div>
 
                 {/* Ticket Quantities */}
-                <div className="flex items-center gap-[8px] mb-[4px]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9z"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
+                {tickets.map((ticket: any, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-[8px] mb-[4px]"
+                  >
+                    <Img
+                      src="https://assets.avenueticketing.com/email-template/ticket-icon.png"
+                      alt="Ticket Icon"
+                      width="16"
+                      height="16"
                     />
-                    <path d="M9 9h6M9 15h6" stroke="#9ca3af" strokeWidth="2" />
-                  </svg>
-                  <Text className="text-gray-400 text-[14px] text-small-responsive">
-                    Regular × 2
-                  </Text>
-                </div>
-
-                <div className="flex items-center gap-[8px] mb-[20px]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9z"
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                    />
-                    <path d="M9 9h6M9 15h6" stroke="#9ca3af" strokeWidth="2" />
-                  </svg>
-                  <Text className="text-gray-400 text-[14px] text-small-responsive">
-                    Early Bird × 1
-                  </Text>
-                </div>
+                    <Text className="text-gray-400 text-[14px] text-small-responsive">
+                      {ticket.type} × {ticket.quantity}
+                    </Text>
+                  </div>
+                ))}
 
                 {/* Action Buttons - Remove the description from here */}
               </div>
@@ -375,13 +306,13 @@ const EventCancellationEmail = (props: any) => {
                 }}
               >
                 The good news is that a refund will be processed automatically
-                for you. You should expect to receive your refund within 30
-                days. Please note: If the tickets were transferred to you, the
-                refund will go to the fan who originally purchased the tickets
-                from Avenue. Thank you for your patience and understanding. We
-                look forward to gathering and celebrating the live experience
-                together again. Please see below for an important message from
-                BIGHIT MUSIC regarding this announcement.
+                for you. You should expect to receive your refund within{" "}
+                {processingTime}. Please note: If the tickets were transferred
+                to you, the refund will go to the fan who originally purchased
+                the tickets from Avenue. Thank you for your patience and
+                understanding. We look forward to gathering and celebrating the
+                live experience together again. Please see below for an
+                important message from BIGHIT MUSIC regarding this announcement.
               </Text>
 
               {/* Announcement Section */}
@@ -432,34 +363,13 @@ const EventCancellationEmail = (props: any) => {
                   backgroundColor: "#101010",
                 }}
               >
-                <svg
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/refund-icon.png"
+                  alt="Refund Icon"
                   width="20"
                   height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
                   className="inline-block"
-                >
-                  <rect
-                    x="2"
-                    y="3"
-                    width="20"
-                    height="14"
-                    rx="2"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M8 21v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M6 7h.01M10 7h.01M14 7h.01"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                />
                 <Text className="text-white text-[18px] font-semibold m-0 text-large-responsive">
                   Refund summary
                 </Text>
@@ -489,76 +399,39 @@ const EventCancellationEmail = (props: any) => {
                   </Column>
                 </Row>
 
-                {/* Regular Tickets */}
-                <Row className="mb-[8px]">
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      🎫 Regular
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      2
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      42
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%] text-right">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      $39
-                    </Text>
-                  </Column>
-                </Row>
-
-                <Row className="mb-[8px]">
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      🎫 Regular
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      2
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      43
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%] text-right">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      $39
-                    </Text>
-                  </Column>
-                </Row>
-
-                {/* Early Bird Ticket */}
-                <Row className="mb-[16px]">
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      🎫 Early Bird
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      1
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%]">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      12
-                    </Text>
-                  </Column>
-                  <Column className="w-[25%] text-right">
-                    <Text className="text-white text-[14px] text-small-responsive">
-                      $19
-                    </Text>
-                  </Column>
-                </Row>
+                {/* Ticket Details */}
+                {ticketDetails.map((ticket: any, index: number) => (
+                  <Row key={index} className="mb-[8px]">
+                    <Column className="w-[25%]">
+                      <div className="flex items-center gap-[4px]">
+                        <Img
+                          src="https://assets.avenueticketing.com/ticket-icon.png"
+                          alt="Ticket icon"
+                          width="14"
+                          height="14"
+                        />
+                        <Text className="text-white text-[14px] text-small-responsive">
+                          {ticket.type}
+                        </Text>
+                      </div>
+                    </Column>
+                    <Column className="w-[25%]">
+                      <Text className="text-white text-[14px] text-small-responsive">
+                        {ticket.row}
+                      </Text>
+                    </Column>
+                    <Column className="w-[25%]">
+                      <Text className="text-white text-[14px] text-small-responsive">
+                        {ticket.seat}
+                      </Text>
+                    </Column>
+                    <Column className="w-[25%] text-right">
+                      <Text className="text-white text-[14px] text-small-responsive">
+                        {ticket.price}
+                      </Text>
+                    </Column>
+                  </Row>
+                ))}
               </div>
             </Section>
             {/* Help Section */}
@@ -573,27 +446,13 @@ const EventCancellationEmail = (props: any) => {
                   backgroundColor: "#101010",
                 }}
               >
-                <svg
+                <Img
+                  src="https://assets.avenueticketing.com/email-template/help-icon.png"
+                  alt="Help Icon"
                   width="20"
                   height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
                   className="inline-block"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M12 16v-4m0-4h.01"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                />
                 <Text className="text-white text-[18px] font-semibold m-0 text-large-responsive">
                   Need Help?
                 </Text>
