@@ -86,6 +86,7 @@ const WelcomeEmail = (props: any) => {
             }
           }
         `}</style>
+         {/* email subject */}
       </Head>
       <Preview>
         Welcome to {eventName}! Your journey to an amazing experience starts
